@@ -13,6 +13,6 @@ import { FormInputMixin } from '../../../mixins/FormInputMixin';
     multi: true
   }]
 })
-export class InputComponent extends FormInputMixin{
+export class InputComponent extends FormInputMixin {
   @Input() type: string = 'text';
 }

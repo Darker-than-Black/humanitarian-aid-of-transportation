@@ -9,5 +9,4 @@ import { EditorMixin } from '../../../mixins/EditorMixin';
   styleUrls: ['./text-editor.component.scss']
 })
 export class TextEditorComponent extends EditorMixin implements EditorComponent {
-  @Input() type: string = 'text';
 }

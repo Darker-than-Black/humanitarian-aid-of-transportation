@@ -1,7 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
 import { ApiService } from '../services/api.service';
-import { EditorComponent, Item } from '../types';
+import { EditorComponent, Item, TableColumnConfig } from '../types';
 
 @Component({
   template: '',
@@ -10,7 +10,7 @@ export class EditorMixin implements EditorComponent, OnInit {
   constructor(protected apiService: ApiService) {}
 
   @Input() data!: Item;
-  @Input() fieldName!: string;
+  @Input() config!: TableColumnConfig;
   @Output() finally = new EventEmitter<void>();
 
   field: string = '';
@@ -19,7 +19,7 @@ export class EditorMixin implements EditorComponent, OnInit {
   update(): void {
     this.loading = true;
 
-    this.apiService.updateItem({...this.data, [this.fieldName]: this.field})
+    this.apiService.updateItem({...this.data, [this.config.field]: this.field})
       .subscribe(() => {
         this.loading = false;
         this.finally.emit();
@@ -27,6 +27,6 @@ export class EditorMixin implements EditorComponent, OnInit {
   }
 
   ngOnInit(): void {
-    this.field = this.data[this.fieldName] || '';
+    this.field = this.data[this.config.field] || '';
   }
 }

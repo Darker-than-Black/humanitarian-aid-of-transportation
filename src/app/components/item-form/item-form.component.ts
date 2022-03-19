@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { ApiService } from '../../services/api.service';
@@ -10,6 +10,8 @@ import { ApiService } from '../../services/api.service';
 })
 export class ItemFormComponent {
   constructor(private apiService: ApiService, private fb: FormBuilder) {}
+
+  @Output() closeModal = new EventEmitter<void>();
 
   loading: boolean = false;
   form = this.fb.group({
@@ -28,13 +30,11 @@ export class ItemFormComponent {
     comment: [''],
   });
 
-  @Input() showDialog!: boolean;
-
   addItem(): void {
     this.loading = true;
     this.apiService.addItem(this.form.value).subscribe(() => {
       this.loading = false;
-      this.showDialog = false;
+      this.closeModal.emit();
     });
   }
 }

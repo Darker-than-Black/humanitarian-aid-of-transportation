@@ -1,10 +1,11 @@
 <p-dialog
-  [(visible)]="showDialog"
+  [visible]="true"
   [modal]="true"
   [maximizable]="true"
   header="Нове перевезення"
   [style]="{width: '50vw'}"
   [breakpoints]="{'960px': '75vw', '640px': '97vw'}"
+  (visibleChange)="closeModal.emit()"
 >
     <form class="grid p-fluid" [formGroup]="form" (ngSubmit)="addItem()">
       <div class="field col-12 md:col-6">
@@ -29,7 +30,11 @@
 
       <div class="field col-12 md:col-6">
         <label for="sender_phone">Контактний телефон відправника</label>
-        <app-input formControlName="sender_phone" inputId="sender_phone"></app-input>
+        <app-input-mask
+          formControlName="sender_phone"
+          inputId="sender_phone"
+          mask="+(999) 999-9999"
+        ></app-input-mask>
       </div>
 
       <div class="field col-12 md:col-6">
@@ -49,17 +54,21 @@
 
       <div class="field col-12 md:col-6">
         <label for="recipient_phone">Контактний телефон отримувача</label>
-        <app-input formControlName="recipient_phone" inputId="recipient_phone"></app-input>
+        <app-input-mask
+          formControlName="recipient_phone"
+          inputId="recipient_phone"
+          mask="+(999) 999-9999"
+        ></app-input-mask>
       </div>
 
       <div class="field col-12 md:col-6">
-        <label for="volume">Об'єм партії</label>
-        <app-input formControlName="volume" inputId="volume"></app-input>
+        <label for="volume">Об'єм партії, м3</label>
+        <app-input formControlName="volume" type="number" inputId="volume"></app-input>
       </div>
 
       <div class="field col-12 md:col-6">
-        <label for="weight">Вага партії</label>
-        <app-input formControlName="weight" inputId="weight"></app-input>
+        <label for="weight">Вага партії, кг</label>
+        <app-input formControlName="weight" type="number" inputId="weight"></app-input>
       </div>
 
       <div class="field col-12 md:col-6">

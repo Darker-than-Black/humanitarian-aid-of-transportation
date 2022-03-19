@@ -25,7 +25,8 @@ export const TABLE_CONFIG: TableColumnConfig[] = [
   {
     field: 'sender_phone',
     header: 'Контактний телефон відправника',
-    editType: EDITOR_TYPES.INPUT,
+    editType: EDITOR_TYPES.MASK,
+    inputMask: '+(999) 999-9999',
   },
   {
     field: 'recipient_name',
@@ -45,17 +46,20 @@ export const TABLE_CONFIG: TableColumnConfig[] = [
   {
     field: 'recipient_phone',
     header: 'Контактний телефон отримувача',
-    editType: EDITOR_TYPES.INPUT,
+    editType: EDITOR_TYPES.MASK,
+    inputMask: '+(999) 999-9999',
   },
   {
     field: 'volume',
-    header: 'Об\'єм партії',
+    header: 'Об\'єм партії, м3',
     editType: EDITOR_TYPES.INPUT,
+    inputType: 'number',
   },
   {
     field: 'weight',
-    header: 'Вага партії',
+    header: 'Вага партії, кг',
     editType: EDITOR_TYPES.INPUT,
+    inputType: 'number',
   },
   {
     field: 'temperature',

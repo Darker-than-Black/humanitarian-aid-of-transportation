@@ -11,7 +11,7 @@ export class FormInputMixin implements ControlValueAccessor {
 
   @Output() leave = new EventEmitter<void>();
 
-  @Input() hasSetFocus: boolean = false;
+  @Input() autoFocus: boolean = false;
   @Input() inputId: string = '';
   @Input() set value(val: string) {
     this._value = val;
@@ -23,8 +23,15 @@ export class FormInputMixin implements ControlValueAccessor {
   }
 
   ngAfterViewInit(): void {
-    if (this.hasSetFocus) {
-      this.inputEl.nativeElement.focus();
+    if (this.autoFocus) {
+      setTimeout(() => {
+        const { nativeElement, el } = this.inputEl as any;
+        if (el === undefined) {
+          return nativeElement.focus();
+        }
+
+        el.nativeElement.querySelector('input').focus();
+      }, 0);
     }
   }
 

@@ -1,6 +1,6 @@
 <app-select
   [(ngModel)]="field"
-  [hasSetFocus]="true"
-  [fieldName]="fieldName"
+  [autoFocus]="true"
+  [fieldName]="config.field"
   (leave)="update()"
 ></app-select>

@@ -43,7 +43,7 @@ export class TableDataComponent {
 
     // set props
     componentRef.instance.data = this.item;
-    componentRef.instance.fieldName = this.config.field;
+    componentRef.instance.config = this.config;
     // auto close
     componentRef.instance.finally.subscribe(() => {
       this.showEditor = false;

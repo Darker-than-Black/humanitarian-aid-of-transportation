@@ -8,9 +8,10 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { AppComponent } from './app.component';
@@ -24,20 +25,24 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
 import { InputComponent } from './components/forms/input/input.component';
 import { TextareaComponent } from './components/forms/textarea/textarea.component';
 import { SelectComponent } from './components/forms/select/select.component';
+import { InputMaskComponent } from './components/forms/input-mask/input-mask.component';
+import { InputMaskEditorComponent } from './components/editors/input-mask-editor/input-mask-editor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    InputComponent,
     TableComponent,
+    SelectComponent,
+    ItemFormComponent,
+    TextareaComponent,
     TableDataComponent,
     TextEditorComponent,
     EditorTypeDirective,
     SelectEditorComponent,
     TextareaEditorComponent,
-    ItemFormComponent,
-    InputComponent,
-    TextareaComponent,
-    SelectComponent,
+    InputMaskComponent,
+    InputMaskEditorComponent,
   ],
   imports: [
     TableModule,
@@ -47,6 +52,7 @@ import { SelectComponent } from './components/forms/select/select.component';
     ButtonModule,
     BrowserModule,
     InputTextModule,
+    InputMaskModule,
     HttpClientModule,
     ReactiveFormsModule,
     InputTextareaModule,
