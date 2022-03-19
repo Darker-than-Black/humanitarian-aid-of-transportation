@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { EditorComponent } from '../../../types';
 import { EditorMixin } from '../../../mixins/EditorMixin';
@@ -8,6 +8,6 @@ import { EditorMixin } from '../../../mixins/EditorMixin';
   templateUrl: './text-editor.component.html',
   styleUrls: ['./text-editor.component.scss']
 })
-export class TextEditorComponent extends EditorMixin implements OnInit, EditorComponent {
+export class TextEditorComponent extends EditorMixin implements EditorComponent {
   @Input() type: string = 'text';
 }

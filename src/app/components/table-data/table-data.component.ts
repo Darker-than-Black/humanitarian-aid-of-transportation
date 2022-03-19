@@ -44,7 +44,7 @@ export class TableDataComponent {
     // set props
     componentRef.instance.data = this.item;
     componentRef.instance.fieldName = this.config.field;
-    // auto close modal
+    // auto close
     componentRef.instance.finally.subscribe(() => {
       this.showEditor = false;
       this.editorDirective.viewContainerRef.clear();

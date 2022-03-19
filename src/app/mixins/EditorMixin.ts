@@ -12,26 +12,21 @@ export class EditorMixin implements EditorComponent, OnInit {
   @Input() data!: Item;
   @Input() fieldName!: string;
   @Output() finally = new EventEmitter<void>();
-  @ViewChild('input') inputEl!: ElementRef;
 
   field: string = '';
   loading: boolean = false;
 
   update(): void {
-    this.finally.emit();
+    this.loading = true;
 
-    // this.loading = true;
-    // this.apiService.update({...this.data, [this.fieldName]: this.field}).subscribe(() => {
-    //   this.loading = false;
-    //   this.finally.emit();
-    // });
+    this.apiService.updateItem({...this.data, [this.fieldName]: this.field})
+      .subscribe(() => {
+        this.loading = false;
+        this.finally.emit();
+      });
   }
 
   ngOnInit(): void {
     this.field = this.data[this.fieldName] || '';
-  }
-
-  ngAfterViewInit(): void {
-    this.inputEl.nativeElement.focus();
   }
 }

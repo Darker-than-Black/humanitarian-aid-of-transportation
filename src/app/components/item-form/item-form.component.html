@@ -1,0 +1,94 @@
+<p-dialog
+  [(visible)]="showDialog"
+  [modal]="true"
+  [maximizable]="true"
+  header="Нове перевезення"
+  [style]="{width: '50vw'}"
+  [breakpoints]="{'960px': '75vw', '640px': '97vw'}"
+>
+    <form class="grid p-fluid" [formGroup]="form" (ngSubmit)="addItem()">
+      <div class="field col-12 md:col-6">
+        <label for="name">Ідентифікатор партії</label>
+        <app-input formControlName="name" inputId="name"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="sender_name">Назва відправника</label>
+        <app-input formControlName="sender_name" inputId="sender_name"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="sender_address">Адреса відправника</label>
+        <app-input formControlName="sender_address" inputId="sender_address"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="sender_contact">Контактна особа відправника</label>
+        <app-input formControlName="sender_contact" inputId="sender_contact"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="sender_phone">Контактний телефон відправника</label>
+        <app-input formControlName="sender_phone" inputId="sender_phone"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="recipient_name">Назва отримувача</label>
+        <app-input formControlName="recipient_name" inputId="recipient_name"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="recipient_address">Адреса отримувача</label>
+        <app-input formControlName="recipient_address" inputId="recipient_address"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="recipient_contact">Контактна особа отримувача</label>
+        <app-input formControlName="recipient_contact" inputId="recipient_contact"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="recipient_phone">Контактний телефон отримувача</label>
+        <app-input formControlName="recipient_phone" inputId="recipient_phone"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="volume">Об'єм партії</label>
+        <app-input formControlName="volume" inputId="volume"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="weight">Вага партії</label>
+        <app-input formControlName="weight" inputId="weight"></app-input>
+      </div>
+
+      <div class="field col-12 md:col-6">
+        <label for="temperature">Температурний контроль</label>
+        <app-select formControlName="temperature" inputId="temperature" fieldName="temperature"></app-select>
+      </div>
+
+      <div class="field col-12">
+        <label for="comment">Коментар</label>
+        <app-textarea formControlName="comment" inputId="comment"></app-textarea>
+      </div>
+
+      <div class="col-12">
+        <button
+          [disabled]="!form.valid || loading"
+          pButton
+          pRipple
+          type="submit"
+          label="Зберегти"
+          class="p-button-success"
+        >
+          <p-progressSpinner
+            *ngIf="loading"
+            strokeWidth="5"
+            animationDuration="3s"
+            class="mr-2"
+            [style]="{width: '20px', height: '20px'}"
+          ></p-progressSpinner>
+        </button>
+      </div>
+    </form>
+</p-dialog>

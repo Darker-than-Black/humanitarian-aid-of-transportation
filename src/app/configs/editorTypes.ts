@@ -1,3 +1,5 @@
 export enum EDITOR_TYPES {
-  INPUT = 'INPUT'
+  INPUT = 'INPUT',
+  TEXTAREA = 'TEXTAREA',
+  SELECT = 'SELECT',
 }

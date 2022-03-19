@@ -1,3 +1,9 @@
-<app-table [data]="store.list" [loading]="loading"></app-table>
+<app-table
+  [data]="store.list"
+  [loading]="loading"
+  (openModal)="showDialog = true"
+></app-table>
+
+<app-item-form [showDialog]="showDialog"></app-item-form>
 
 <p-toast [baseZIndex]="5000" position="bottom-right"></p-toast>

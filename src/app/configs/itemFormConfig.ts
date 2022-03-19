@@ -1,70 +1,84 @@
-import {TableColumnConfig} from '../types';
-import {EDITOR_TYPES} from './editorTypes';
+import { InputComponent } from '../components/forms/input/input.component';
+import { TextareaComponent } from '../components/forms/textarea/textarea.component';
+import { SelectComponent } from '../components/forms/select/select.component';
 
-export const TABLE_CONFIG: TableColumnConfig[] = [
+export const ITEM_FORM_CONFIG = [
   {
+    class: 'field col-12 md:col-6',
     field: 'name',
     header: 'Ідентифікатор партії',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'sender_name',
     header: 'Назва відправника',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'sender_address',
     header: 'Адреса відправника',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'sender_contact',
     header: 'Контактна особа відправника',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'sender_phone',
     header: 'Контактний телефон відправника',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'recipient_name',
     header: 'Назва отримувача',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'recipient_address',
     header: 'Адреса отримувача',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'recipient_contact',
     header: 'Контактна особа отримувача',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'recipient_phone',
     header: 'Контактний телефон отримувача',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'volume',
     header: 'Об\'єм партії',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'weight',
     header: 'Вага партії',
-    editType: EDITOR_TYPES.INPUT,
+    component: InputComponent,
   },
   {
+    class: 'field col-12 md:col-6',
     field: 'temperature',
     header: 'Температурний контроль',
-    editType: EDITOR_TYPES.SELECT,
+    component: SelectComponent,
   },
   {
+    class: 'field col-12',
     field: 'comment',
     header: 'Коментар',
-    editType: EDITOR_TYPES.TEXTAREA,
+    component: TextareaComponent,
   },
 ];

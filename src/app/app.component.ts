@@ -9,19 +9,16 @@ import { StoreService } from './services/store.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor(
-    public store: StoreService,
-    private apiService: ApiService,
-  ) {}
+  constructor(public store: StoreService, private apiService: ApiService) {}
 
   loading: boolean = false;
+  showDialog: boolean = false;
 
   ngOnInit() {
-    // this.loading = true;
+    this.loading = true;
 
-    this.apiService.getList();
-    // .subscribe(() => {
-    //   this.loading = false;
-    // });
+    this.apiService.getList().subscribe(() => {
+      this.loading = false;
+    });
   }
 }
