@@ -31,12 +31,12 @@
 
   <ng-template pTemplate="header" let-columns>
     <tr>
-      <th *ngFor="let col of columns">{{ col.header }}</th>
+      <th *ngFor="let col of columns">{{ col.label }}</th>
     </tr>
     <tr>
       <th *ngFor="let col of columns">
         <div class="goods-table__input">
-          <p-columnFilter type="text" [field]="col.field"></p-columnFilter>
+          <p-columnFilter type="text" [field]="col.key"></p-columnFilter>
         </div>
       </th>
     </tr>

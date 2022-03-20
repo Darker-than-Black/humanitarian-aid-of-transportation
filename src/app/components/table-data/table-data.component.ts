@@ -1,9 +1,9 @@
 import { get } from 'lodash';
-import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 
-import { editorsDictionary } from '../../configs/editorsDictionary';
-import { EditorComponent, TableColumnConfig, Item } from '../../types';
-import { EditorTypeDirective } from '../../directives/editor-type.directive';
+import { TableColumnConfig, Item, CustomFormlyFieldConfig } from '../../types';
+import { ApiService } from '../../services/api.service';
+import { EditorBuilder } from './editor-builder';
 
 const DEFAULT_HANDLER = (data: any) => data;
 
@@ -12,16 +12,15 @@ const DEFAULT_HANDLER = (data: any) => data;
   templateUrl: './table-data.component.html',
   styleUrls: ['./table-data.component.scss']
 })
-export class TableDataComponent {
+export class TableDataComponent implements OnInit {
+  constructor(private apiService: ApiService) {}
+
   @Input() item!: Item;
   @Input() config!: TableColumnConfig;
   @Input() template?: TemplateRef<any>;
-  @ViewChild(EditorTypeDirective, {static: true}) editorDirective!: EditorTypeDirective;
-
-  showEditor: boolean = false;
 
   get fieldData(): string {
-    return get(this.item, this.config.field, '');
+    return get(this.item, this.config.key, '');
   }
 
   get previewData(): string {
@@ -29,25 +28,35 @@ export class TableDataComponent {
     return this.fieldData ? handler(this.fieldData) : '–';
   }
 
-  setEditorComponent(): void {
-    const { editType = '' } = this.config;
-    const component = editorsDictionary.get(editType);
+  get isEditable(): boolean {
+    return Boolean(this.config.type);
+  }
 
-    if (!component) {
+  fields: CustomFormlyFieldConfig[] = [];
+  model: Record<string, any> = {};
+
+  ngOnInit(): void {
+    const { key } = this.config;
+    this.model[key] = this.item[key] || '';
+  }
+
+  setEditor(): void {
+    if (!this.isEditable) {
       return;
     }
 
-    this.editorDirective.viewContainerRef.clear();
-    const componentRef = this.editorDirective.viewContainerRef.createComponent<EditorComponent>(component);
-    this.showEditor = true;
-
-    // set props
-    componentRef.instance.data = this.item;
-    componentRef.instance.config = this.config;
-    // auto close
-    componentRef.instance.finally.subscribe(() => {
-      this.showEditor = false;
-      this.editorDirective.viewContainerRef.clear();
+    const field = new EditorBuilder({
+      ...this.config,
+      onLeave: this.onLeave.bind(this),
     });
+
+    this.fields.push(field);
+  }
+
+  onLeave(): void {
+    this.apiService.updateItem({...this.item, ...this.model})
+      .subscribe(() => {
+        this.fields = [];
+      });
   }
 }

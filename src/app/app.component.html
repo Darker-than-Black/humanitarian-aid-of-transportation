@@ -4,8 +4,6 @@
   (openModal)="showDialog = true"
 ></app-table>
 
-{{ showDialog }}
-
 <app-item-form *ngIf="showDialog" (closeModal)="showDialog = false"></app-item-form>
 
 <p-toast [baseZIndex]="5000" position="bottom-right"></p-toast>

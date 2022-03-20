@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TextareaEditorComponent } from './textarea-editor.component';
+import { DynamicInputComponent } from './dynamic-input.component';
 
-describe('TextareaEditorComponent', () => {
-  let component: TextareaEditorComponent;
-  let fixture: ComponentFixture<TextareaEditorComponent>;
+describe('DynamicInputComponent', () => {
+  let component: DynamicInputComponent;
+  let fixture: ComponentFixture<DynamicInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextareaEditorComponent ]
+      declarations: [ DynamicInputComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TextareaEditorComponent);
+    fixture = TestBed.createComponent(DynamicInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectEditorComponent } from './select-editor.component';
+import { DynamicSelectComponent } from './dynamic-select.component';
 
-describe('SelectEditorComponent', () => {
-  let component: SelectEditorComponent;
-  let fixture: ComponentFixture<SelectEditorComponent>;
+describe('DynamicSelectComponent', () => {
+  let component: DynamicSelectComponent;
+  let fixture: ComponentFixture<DynamicSelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectEditorComponent ]
+      declarations: [ DynamicSelectComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectEditorComponent);
+    fixture = TestBed.createComponent(DynamicSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

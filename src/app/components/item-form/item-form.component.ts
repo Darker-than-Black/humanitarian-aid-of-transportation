@@ -1,34 +1,32 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 import { ApiService } from '../../services/api.service';
+import { ITEM_FORM_CONFIG } from '../../configs/itemFormConfig';
+import { CustomFormlyFieldConfig } from '../../types';
+import { FieldBuilder } from './field-builder';
 
 @Component({
   selector: 'app-item-form',
   templateUrl: './item-form.component.html',
   styleUrls: ['./item-form.component.scss']
 })
-export class ItemFormComponent {
-  constructor(private apiService: ApiService, private fb: FormBuilder) {}
+export class ItemFormComponent implements OnInit {
+  constructor(private apiService: ApiService) {}
 
   @Output() closeModal = new EventEmitter<void>();
 
   loading: boolean = false;
-  form = this.fb.group({
-    name: ['', Validators.required],
-    sender_name: ['', Validators.required],
-    sender_address: ['', Validators.required],
-    sender_contact: ['', Validators.required],
-    sender_phone: ['', Validators.required],
-    recipient_name: ['', Validators.required],
-    recipient_address: ['', Validators.required],
-    recipient_contact: ['', Validators.required],
-    recipient_phone: ['', Validators.required],
-    volume: ['', Validators.required],
-    weight: ['', Validators.required],
-    temperature: ['', Validators.required],
-    comment: [''],
-  });
+  form = new FormGroup({});
+  model: Record<string, any> = {};
+  fields: CustomFormlyFieldConfig[] = [];
+
+  ngOnInit() {
+    ITEM_FORM_CONFIG.forEach(item => {
+      this.model[item.key] = '';
+      this.fields.push(new FieldBuilder(item));
+    });
+  }
 
   addItem(): void {
     this.loading = true;

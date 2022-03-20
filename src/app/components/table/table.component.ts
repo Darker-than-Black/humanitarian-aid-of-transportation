@@ -16,6 +16,6 @@ export class TableComponent {
   columns: TableColumnConfig[] = TABLE_CONFIG;
 
   get fieldsOfColumns(): string[] {
-    return this.columns.map(({field}) => field);
+    return this.columns.map(({key}) => key);
   }
 }

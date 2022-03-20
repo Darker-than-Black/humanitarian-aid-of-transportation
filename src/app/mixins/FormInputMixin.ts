@@ -11,7 +11,7 @@ export class FormInputMixin implements ControlValueAccessor {
 
   @Output() leave = new EventEmitter<void>();
 
-  @Input() autoFocus: boolean = false;
+  @Input() autoFocus?: boolean;
   @Input() inputId: string = '';
   @Input() set value(val: string) {
     this._value = val;
