@@ -6,6 +6,7 @@ import { ApiService } from '../../services/api.service';
 import { EditorBuilder } from './editor-builder';
 
 const DEFAULT_HANDLER = (data: any) => data;
+const DEFAULT_VISIBLE_EDITOR_HANDLER = (data: any) => true;
 
 @Component({
   selector: 'app-table-data',
@@ -29,7 +30,8 @@ export class TableDataComponent implements OnInit {
   }
 
   get isEditable(): boolean {
-    return Boolean(this.config.type);
+    const {type, visibleEditorHandler = DEFAULT_VISIBLE_EDITOR_HANDLER} = this.config;
+    return Boolean(type) && visibleEditorHandler(this.item);
   }
 
   fields: CustomFormlyFieldConfig[] = [];
@@ -54,6 +56,12 @@ export class TableDataComponent implements OnInit {
   }
 
   onLeave(): void {
+    const { key } = this.config;
+    if (this.model[key] === this.item[key]) {
+      this.fields = [];
+      return;
+    }
+
     this.apiService.updateItem({...this.item, ...this.model})
       .subscribe(() => {
         this.fields = [];

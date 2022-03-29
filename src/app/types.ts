@@ -6,8 +6,28 @@ export interface TableColumnConfig {
   key: string
   label: string
   type?: FIELD_TYPES
+  visibleEditorHandler?: (i: Item) => boolean
   inputMask?: string
   handler?: (data: any) => any
+}
+
+export interface FormFieldConfig {
+  key: string
+  label: string
+  type: FIELD_TYPES
+  inputMask?: string
+  class?: string
+  required?: boolean
+}
+
+export interface AppConfig {
+  table: TableColumnConfig[]
+  rowForm: FormFieldConfig[]
+  apiUrls: {
+    getData: string
+    updateRow?: string
+    addRow?: string
+  }
 }
 
 export interface ServerResponse<T> {
@@ -16,44 +36,9 @@ export interface ServerResponse<T> {
   data: T
 }
 
-export interface ListServerResponse<T> extends ServerResponse<T> {
-  temp_list: string[]
-}
+export interface Item extends Record<string, string | undefined> {}
 
-export interface Item extends Record<string, string | undefined> {
-  id: string
-  comment?: string
-  creator?: string
-  name?: string
-  recipient_address?: string
-  recipient_contact?: string
-  recipient_name?: string
-  recipient_phone?: string
-  sender_address?: string
-  sender_contact?: string
-  sender_name?: string
-  sender_phone?: string
-  temperature?: string
-  volume?: string
-  weight?: string
-}
-
-export interface ItemForm {
-  name: string
-  comment: string
-  creator: string
-  volume: string
-  weight: string
-  temperature: string
-  recipient_address: string
-  recipient_contact: string
-  recipient_name: string
-  recipient_phone: string
-  sender_address: string
-  sender_contact: string
-  sender_name: string
-  sender_phone: string
-}
+export interface ItemForm extends Record<string, any> {}
 
 /* ------ FORMLY ------ */
 export interface CustomFormlyTemplateOptions extends FormlyTemplateOptions {

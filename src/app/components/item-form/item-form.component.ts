@@ -1,10 +1,9 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { ApiService } from '../../services/api.service';
-import { ITEM_FORM_CONFIG } from '../../configs/itemFormConfig';
-import { CustomFormlyFieldConfig } from '../../types';
 import { FieldBuilder } from './field-builder';
+import { ApiService } from '../../services/api.service';
+import { CustomFormlyFieldConfig, FormFieldConfig } from '../../types';
 
 @Component({
   selector: 'app-item-form',
@@ -14,6 +13,7 @@ import { FieldBuilder } from './field-builder';
 export class ItemFormComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
+  @Input() config!: FormFieldConfig[]
   @Output() closeModal = new EventEmitter<void>();
 
   loading: boolean = false;
@@ -22,7 +22,7 @@ export class ItemFormComponent implements OnInit {
   fields: CustomFormlyFieldConfig[] = [];
 
   ngOnInit() {
-    ITEM_FORM_CONFIG.forEach(item => {
+    this.config.forEach(item => {
       this.model[item.key] = '';
       this.fields.push(new FieldBuilder(item));
     });

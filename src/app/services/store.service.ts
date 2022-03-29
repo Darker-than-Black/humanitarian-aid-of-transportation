@@ -4,7 +4,7 @@ import { Item } from '../types';
 
 interface StoreData {
   list: Item[]
-  tempList: string[]
+  selectOptions: Record<string, string[]>
 }
 
 @Injectable({
@@ -13,15 +13,15 @@ interface StoreData {
 export class StoreService {
   private data: StoreData = {
     list: [],
-    tempList: []
+    selectOptions: {}
   };
 
   get list(): Item[] {
     return this.data.list;
   }
 
-  get tempList(): string[] {
-    return this.data.tempList;
+  get selectOptions(): Record<string, string[]> {
+    return this.data.selectOptions;
   }
 
   setList(data: Item[]): void {
@@ -30,14 +30,14 @@ export class StoreService {
 
   updateListItem(item: Item): void {
     this.data.list = this.data.list
-      .map(el => el.id === item.id ? item : el);
+      .map(el => el['id'] === item['id'] ? item : el);
   }
 
   addListItem(item: Item): void {
     this.data.list.push(item);
   }
 
-  setTempList(list: string[]): void {
-    this.data.tempList = list;
+  setSelectOptions(data: Record<string, string[]>): void {
+    this.data.selectOptions = data;
   }
 }

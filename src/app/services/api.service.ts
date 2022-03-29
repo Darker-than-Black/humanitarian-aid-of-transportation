@@ -1,13 +1,12 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 
-import * as ROUTES from '../configs/apiRoutes';
 import { StoreService } from './store.service';
 import { NotificationService } from './notification.service';
 import { NOTIFICATION_TYPES } from '../configs/notificationTypes';
 import { notificationMessages } from '../configs/notificationMessages';
-import { Item, ItemForm, ListServerResponse, ServerResponse } from '../types';
+import { Item, ItemForm, ServerResponse } from '../types';
 
 @Injectable({
   providedIn: 'root'
@@ -19,35 +18,48 @@ export class ApiService {
     private notification: NotificationService,
   ) {}
 
+  private routes: Record<string, string> = {
+    getData: '',
+    updateRow: '',
+    addRow: '',
+  };
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  getList(): Observable<void> {
-    const url = this.addDevMode(ROUTES.GET_LOGISTICS);
-    return this.http.get<ListServerResponse<Item[]>>(url).pipe(
-      map(({ data, temp_list }) => {
+  getData(): Observable<void> {
+    const url = this.addDevMode(this.routes['getData']);
+    return this.http.get<ServerResponse<Item[]>>(url).pipe(
+      map(({ data, temp_list }: any) => {
         this.store.setList(data);
-        this.store.setTempList(temp_list);
+        this.store.setSelectOptions({ temperature: temp_list });
       }),
-      catchError(this.handleError<void>(notificationMessages.serverError, 'getList')),
+      catchError(this.handleError<void>(notificationMessages.serverError, 'getData')),
     );
   }
 
   updateItem(item: Item): Observable<void> {
-    const url = this.addDevMode(ROUTES.UPDATE_LOGISTIC);
+    const url = this.addDevMode(this.routes['updateRow']);
     return this.http.post<ServerResponse<Item>>(url, item, this.httpOptions).pipe(
       map(({ data }) => this.store.updateListItem(data)),
+      tap(() => this.notification.add(notificationMessages.updateSuccess, NOTIFICATION_TYPES.SUCCESS)),
       catchError(this.handleError<void>(notificationMessages.serverError, 'updateItem')),
     );
   }
 
   addItem(item: ItemForm): Observable<void> {
-    const url = this.addDevMode(ROUTES.UPDATE_LOGISTIC);
+    const url = this.addDevMode(this.routes['addRow']);
     return this.http.post<ServerResponse<Item>>(url, item, this.httpOptions).pipe(
       map(({ data }) => this.store.addListItem(data)),
+      tap(() => this.notification.add(notificationMessages.fieldSuccess, NOTIFICATION_TYPES.SUCCESS)),
       catchError(this.handleError<void>(notificationMessages.serverError, 'addItem')),
     );
+  }
+
+  setRoutes(routes: Record<string, string>): void {
+    Object.entries(routes).forEach(([key, route]) => {
+      this.routes[key] = this.addDevMode(route);
+    });
   }
 
   private addDevMode(url: string): string {
