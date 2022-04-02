@@ -8,12 +8,10 @@
   (visibleChange)="closeModal.emit()"
 >
   <form [formGroup]="form" (ngSubmit)="addItem()">
-    <formly-form
+    <med-dynamic-form
       [form]="form"
-      [fields]="fields"
-      [model]="model"
-      class="grid p-fluid"
-    ></formly-form>
+      [config]="config"
+    ></med-dynamic-form>
 
     <div class="col-12">
       <button

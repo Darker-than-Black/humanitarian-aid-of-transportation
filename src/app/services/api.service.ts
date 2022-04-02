@@ -1,7 +1,10 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
+import { MedTableService } from 'med-table';
+import { MedDynamicFormService } from 'med-dynamic-form';
 
+import { SelectData } from './select-data';
 import { StoreService } from './store.service';
 import { NotificationService } from './notification.service';
 import { NOTIFICATION_TYPES } from '../configs/notificationTypes';
@@ -16,6 +19,8 @@ export class ApiService {
     private http: HttpClient,
     private store: StoreService,
     private notification: NotificationService,
+    private tableService: MedTableService,
+    private dynamicFormService: MedDynamicFormService,
   ) {}
 
   private routes: Record<string, string> = {
@@ -32,7 +37,8 @@ export class ApiService {
     return this.http.get<ServerResponse<Item[]>>(url).pipe(
       map(({ data, temp_list }: any) => {
         this.store.setList(data);
-        this.store.setSelectOptions({ temperature: temp_list });
+        this.tableService.setSelectData(SelectData.temperature(temp_list), 'temperature');
+        this.dynamicFormService.setSelectData(SelectData.temperature(temp_list), 'temperature');
       }),
       catchError(this.handleError<void>(notificationMessages.serverError, 'getData')),
     );

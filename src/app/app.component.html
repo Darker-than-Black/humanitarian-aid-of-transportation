@@ -1,9 +1,16 @@
-<app-table
+<med-table
   [data]="store.list"
   [loading]="loading"
   [config]="tableConfig"
-  (openModal)="showDialog = true"
-></app-table>
+  (updateColumn)="onUpdateColumn($event)"
+  [toolbarTemplate]="toolbarTemplate"
+>
+  <ng-template #toolbarTemplate>
+    <p-button (click)="showDialog = true">
+      Додати
+    </p-button>
+  </ng-template>
+</med-table>
 
 <app-item-form
   *ngIf="showDialog"
