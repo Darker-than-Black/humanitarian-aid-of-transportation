@@ -9,7 +9,6 @@ import {MessageService} from 'primeng/api';
 import {ButtonModule} from 'primeng/button';
 import {DialogModule} from 'primeng/dialog';
 import {InputTextModule} from 'primeng/inputtext';
-import {InputMaskModule} from 'primeng/inputmask';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {MedTableModule} from 'med-table';
@@ -32,7 +31,6 @@ import {ItemFormComponent} from './components/item-form/item-form.component';
     ButtonModule,
     BrowserModule,
     InputTextModule,
-    InputMaskModule,
     HttpClientModule,
     ReactiveFormsModule,
     InputTextareaModule,

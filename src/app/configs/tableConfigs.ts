@@ -75,13 +75,13 @@ export const TABLE_CONFIG: MedTableColumnConfig[] = [
     key: "transport",
     label: "Транспорт",
     filterable: true,
-    viewHandler: ({ name, type }: any) => `${ type || '' } ${ name ? `(${ name })` : '' }`.trim(),
+    viewHandler: ({ name, type }: any) => `${ type || '' } ${ name ? `(${ name })` : '' }`.trim() || '–',
   },
   {
     key: "driver",
     label: "Водій",
     filterable: true,
-    viewHandler: ({ name, phone }: any) => `${ name || '' } ${ phone ? `(${ phone })` : '' }`.trim(),
+    viewHandler: ({ name, phone }: any) => `${ name || '' } ${ phone ? `(${ phone })` : '' }`.trim() || '–',
   },
   {
     key: "volume",
