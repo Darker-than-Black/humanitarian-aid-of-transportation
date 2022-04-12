@@ -1,0 +1,13 @@
+export const KEY_NAME = 'name';
+export const KEY_VOLUME = 'volume';
+export const KEY_WEIGHT = 'weight';
+export const KEY_COMMENT = 'comment';
+export const KEY_TEMPERATURE = 'temperature';
+export const KEY_RECIPIENT_NAME = 'recipient_name';
+export const KEY_RECIPIENT_ADDRESS = 'recipient_address';
+export const KEY_RECIPIENT_CONTACT = 'recipient_contact';
+export const KEY_RECIPIENT_PHONE = 'recipient_phone';
+export const KEY_SENDER_NAME = 'sender_name';
+export const KEY_SENDER_ADDRESS = 'sender_address';
+export const KEY_SENDER_CONTACT = 'sender_contact';
+export const KEY_SENDER_PHONE = 'sender_phone';

@@ -5,11 +5,13 @@ import { MedTableService } from 'med-table';
 import { MedDynamicFormService } from 'med-dynamic-form';
 
 import { SelectData } from './select-data';
+import { getListProperties } from '../utils';
 import { StoreService } from './store.service';
+import { Item, ItemForm, ServerResponse } from '../types';
 import { NotificationService } from './notification.service';
 import { NOTIFICATION_TYPES } from '../configs/notificationTypes';
 import { notificationMessages } from '../configs/notificationMessages';
-import { Item, ItemForm, ServerResponse } from '../types';
+import { KEY_RECIPIENT_NAME, KEY_TEMPERATURE } from '../configs/filedKeys';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +39,9 @@ export class ApiService {
     return this.http.get<ServerResponse<Item[]>>(url).pipe(
       map(({ data, temp_list }: any) => {
         this.store.setList(data);
-        this.tableService.setSelectData(SelectData.temperature(temp_list), 'temperature');
-        this.dynamicFormService.setSelectData(SelectData.temperature(temp_list), 'temperature');
+        this.tableService.setSelectData(SelectData.temperature(temp_list), KEY_TEMPERATURE);
+        this.dynamicFormService.setSelectData(SelectData.temperature(temp_list), KEY_TEMPERATURE);
+        this.dynamicFormService.setDatalist(getListProperties(data, KEY_RECIPIENT_NAME), KEY_RECIPIENT_NAME);
       }),
       catchError(this.handleError<void>(notificationMessages.serverError, 'getData')),
     );

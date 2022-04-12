@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MedUpdateColumnEvent } from 'med-table';
 
+import { Item } from './types';
 import { APP_CONFIG } from './appConfig';
 import { ApiService } from './services/api.service';
 import { StoreService } from './services/store.service';
 import { TABLE_CONFIG } from './configs/tableConfigs';
-import { NEW_ROW_FORM_CONFIG } from './configs/formConfigs';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
   loading: boolean = false;
   showDialog: boolean = false;
   tableConfig = TABLE_CONFIG;
-  rowFormConfig = NEW_ROW_FORM_CONFIG;
 
   ngOnInit() {
     this.loading = true;
@@ -30,7 +29,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onUpdateColumn({ item }: MedUpdateColumnEvent<Record<string, any>>): void {
+  onUpdateColumn({ item }: MedUpdateColumnEvent<Item>): void {
     this.apiService.updateItem(item).subscribe(() => {});
   }
 }

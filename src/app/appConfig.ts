@@ -1,5 +1,4 @@
 import { AppConfig } from './types';
-import { FIELD_TYPES } from './configs/fieldTypes';
 
 export const APP_CONFIG: AppConfig = {
   "apiUrls": {

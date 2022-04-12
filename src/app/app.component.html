@@ -12,10 +12,6 @@
   </ng-template>
 </med-table>
 
-<app-item-form
-  *ngIf="showDialog"
-  [config]="rowFormConfig"
-  (closeModal)="showDialog = false"
-></app-item-form>
+<item-form *ngIf="showDialog" (closeModal)="showDialog = false"></item-form>
 
 <p-toast [baseZIndex]="5000" position="bottom-right"></p-toast>
