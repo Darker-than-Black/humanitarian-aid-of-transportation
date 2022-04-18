@@ -11,7 +11,7 @@ import { Item, ItemForm, ServerResponse } from '../types';
 import { NotificationService } from './notification.service';
 import { NOTIFICATION_TYPES } from '../configs/notificationTypes';
 import { notificationMessages } from '../configs/notificationMessages';
-import { KEY_RECIPIENT_NAME, KEY_TEMPERATURE } from '../configs/filedKeys';
+import { KEY_RECIPIENT_NAME, KEY_TEMPERATURE, KEY_RECIPIENT_REGION, KEY_SENDER_REGION } from '../configs/filedKeys';
 
 @Injectable({
   providedIn: 'root'
@@ -37,22 +37,26 @@ export class ApiService {
   getData(): Observable<void> {
     const url = this.addDevMode(this.routes['getData']);
     return this.http.get<ServerResponse<Item[]>>(url).pipe(
-      map(({ data, temp_list }: any) => {
+      map(({ data, temp_list, regions }: any) => {
         this.store.setList(data);
+        this.tableService.setSelectData(SelectData.region(regions), KEY_RECIPIENT_REGION);
+        this.tableService.setSelectData(SelectData.region(regions), KEY_SENDER_REGION);
         this.tableService.setSelectData(SelectData.temperature(temp_list), KEY_TEMPERATURE);
         this.dynamicFormService.setSelectData(SelectData.temperature(temp_list), KEY_TEMPERATURE);
+        this.dynamicFormService.setSelectData(SelectData.region(regions), KEY_RECIPIENT_REGION);
+        this.dynamicFormService.setSelectData(SelectData.region(regions), KEY_SENDER_REGION);
         this.dynamicFormService.setDatalist(getListProperties(data, KEY_RECIPIENT_NAME), KEY_RECIPIENT_NAME);
       }),
       catchError(this.handleError<void>(notificationMessages.serverError, 'getData')),
     );
   }
 
-  updateItem(item: Item): Observable<void> {
+  updateItem(item: Item): Observable<Item> {
     const url = this.addDevMode(this.routes['updateRow']);
     return this.http.post<ServerResponse<Item>>(url, item, this.httpOptions).pipe(
-      map(({ data }) => this.store.updateListItem(data)),
+      map(({ data }) => data),
       tap(() => this.notification.add(notificationMessages.updateSuccess, NOTIFICATION_TYPES.SUCCESS)),
-      catchError(this.handleError<void>(notificationMessages.serverError, 'updateItem')),
+      catchError(this.handleError<any>(notificationMessages.serverError, 'updateItem')),
     );
   }
 

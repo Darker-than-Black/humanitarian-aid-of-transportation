@@ -1,4 +1,4 @@
-import { FIELD_TYPES, MedTableColumnConfig } from 'med-table';
+import { FIELD_TYPES, FILTER_TYPES, MedTableColumnConfig } from 'med-table';
 
 export const TABLE_CONFIG: MedTableColumnConfig[] = [
   {
@@ -43,6 +43,14 @@ export const TABLE_CONFIG: MedTableColumnConfig[] = [
     filterable: true,
   },
   {
+    key: "sender_region",
+    label: "Регіон відправника",
+    editorType: FIELD_TYPES.SELECT,
+    visibleEditorHandler: ({ status }: Record<string, any>) => status === 'packed',
+    filterable: true,
+    filterType: FILTER_TYPES.SELECT,
+  },
+  {
     key: "recipient_name",
     label: "Назва отримувача",
     editorType: FIELD_TYPES.TEXT,
@@ -70,6 +78,14 @@ export const TABLE_CONFIG: MedTableColumnConfig[] = [
     inputMask: "+(999) 999-9999",
     filterable: true,
     visibleEditorHandler: ({ status }: Record<string, any>) => status === 'packed'
+  },
+  {
+    key: "recipient_region",
+    label: "Регіон отримувача",
+    filterable: true,
+    editorType: FIELD_TYPES.SELECT,
+    visibleEditorHandler: ({ status }: Record<string, any>) => status === 'packed',
+    filterType: FILTER_TYPES.SELECT,
   },
   {
     key: "transport",

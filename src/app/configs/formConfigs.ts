@@ -33,6 +33,12 @@ export const NEW_ROW_FORM_CONFIG: MedFormFieldConfig[] = [
     required: true
   },
   {
+    key: KEYS.KEY_SENDER_REGION,
+    label: 'Регіон відправника',
+    editorType: FIELD_TYPES.SELECT,
+    required: true
+  },
+  {
     key: KEYS.KEY_RECIPIENT_NAME,
     label: 'Назва отримувача',
     editorType: FIELD_TYPES.AUTOCOMPLETE,
@@ -54,6 +60,12 @@ export const NEW_ROW_FORM_CONFIG: MedFormFieldConfig[] = [
     key: KEYS.KEY_RECIPIENT_PHONE,
     label: 'Контактний телефон отримувача',
     editorType: FIELD_TYPES.TEXT,
+    required: true
+  },
+  {
+    key: KEYS.KEY_RECIPIENT_REGION,
+    label: 'Регіон отримувача',
+    editorType: FIELD_TYPES.SELECT,
     required: true
   },
   {

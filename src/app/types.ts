@@ -22,16 +22,23 @@ export interface Item {
   recipient_contact?: string
   recipient_name?: string
   recipient_phone?: string
+  recipient_region?: string
   sender_address?: string
   sender_contact?: string
   sender_name?: string
   sender_phone?: string
+  sender_region?: string
   status?: string
   status_name?: string
   temperature?: string
   transport: Transport
   volume?: string
   weight?: string
+}
+
+export interface Region {
+  id: string
+  name: string
 }
 
 export interface Driver {

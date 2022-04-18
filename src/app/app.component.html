@@ -3,9 +3,8 @@
   [loading]="loading"
   [config]="tableConfig"
   (updateColumn)="onUpdateColumn($event)"
-  [toolbarTemplate]="toolbarTemplate"
 >
-  <ng-template #toolbarTemplate>
+  <ng-template mTemplate="toolbar">
     <p-button (click)="showDialog = true">
       Додати
     </p-button>

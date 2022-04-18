@@ -29,7 +29,9 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onUpdateColumn({ item }: MedUpdateColumnEvent<Item>): void {
-    this.apiService.updateItem(item).subscribe(() => {});
+  onUpdateColumn({item, key}: MedUpdateColumnEvent<Item>): void {
+    this.apiService.updateItem(item).subscribe((data) => {
+      this.store.updateListItem(data, key);
+    });
   }
 }
